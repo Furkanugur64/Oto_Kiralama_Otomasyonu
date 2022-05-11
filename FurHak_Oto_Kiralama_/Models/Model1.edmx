@@ -1,0 +1,610 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB_AracKiralamaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adminler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="varchar" MaxLength="20" />
+          <Property Name="Soyad" Type="varchar" MaxLength="20" />
+          <Property Name="Kullaniciadi" Type="varchar" MaxLength="20" />
+          <Property Name="Sifre" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Fotograf" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Araclar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Plaka" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Marka" Type="tinyint" />
+          <Property Name="Seri" Type="tinyint" />
+          <Property Name="Yil" Type="varchar" MaxLength="10" />
+          <Property Name="Motor" Type="varchar" MaxLength="30" />
+          <Property Name="KM" Type="varchar" MaxLength="20" />
+          <Property Name="Renk" Type="varchar" MaxLength="20" />
+          <Property Name="Yakittipi" Type="varchar" MaxLength="20" />
+          <Property Name="Vites" Type="varchar" MaxLength="30" />
+          <Property Name="Motorgucu" Type="varchar" MaxLength="20" />
+          <Property Name="Aciklama" Type="varchar" MaxLength="300" />
+          <Property Name="Durum" Type="bit" />
+          <Property Name="Foto" Type="varchar" MaxLength="150" />
+          <Property Name="Günlük" Type="smallint" />
+          <Property Name="Aylik" Type="smallint" />
+          <Property Name="Yillik" Type="smallint" />
+        </EntityType>
+        <EntityType Name="Loglar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Islem" Type="varchar" MaxLength="200" />
+          <Property Name="Zaman" Type="datetime" />
+          <Property Name="Yetkili" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Markalar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Marka" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Müsteriler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tcno" Type="char" MaxLength="11" Nullable="false" />
+          <Property Name="Adi" Type="varchar" MaxLength="20" />
+          <Property Name="Soyadi" Type="varchar" MaxLength="20" />
+          <Property Name="Cinsiyet" Type="varchar" MaxLength="10" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Telefon" Type="varchar" MaxLength="15" />
+          <Property Name="EhliyetNo" Type="char" MaxLength="6" />
+          <Property Name="Adres" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Seriler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Marka" Type="tinyint" />
+          <Property Name="Seri" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Sozlesmeler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tcno" Type="char" MaxLength="11" />
+          <Property Name="Ad" Type="varchar" MaxLength="20" />
+          <Property Name="Soyad" Type="varchar" MaxLength="20" />
+          <Property Name="Cinsiyet" Type="varchar" MaxLength="10" />
+          <Property Name="Personel" Type="tinyint" />
+          <Property Name="Aracid" Type="tinyint" />
+          <Property Name="Plaka" Type="varchar" MaxLength="20" />
+          <Property Name="Marka" Type="tinyint" />
+          <Property Name="Seri" Type="tinyint" />
+          <Property Name="Alistarihi" Type="datetime" />
+          <Property Name="Teslimtarihi" Type="datetime" />
+          <Property Name="Ucret" Type="int" />
+          <Property Name="Durum" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Araclar_Markalar">
+          <End Role="Markalar" Type="Self.Markalar" Multiplicity="0..1" />
+          <End Role="Araclar" Type="Self.Araclar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Markalar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Araclar">
+              <PropertyRef Name="Marka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Araclar_Seriler">
+          <End Role="Seriler" Type="Self.Seriler" Multiplicity="0..1" />
+          <End Role="Araclar" Type="Self.Araclar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seriler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Araclar">
+              <PropertyRef Name="Seri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seriler_Markalar">
+          <End Role="Markalar" Type="Self.Markalar" Multiplicity="0..1" />
+          <End Role="Seriler" Type="Self.Seriler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Markalar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Seriler">
+              <PropertyRef Name="Marka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sozlesmeler_Adminler2">
+          <End Role="Adminler" Type="Self.Adminler" Multiplicity="0..1" />
+          <End Role="Sozlesmeler" Type="Self.Sozlesmeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adminler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sozlesmeler">
+              <PropertyRef Name="Personel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sozlesmeler_Araclar">
+          <End Role="Araclar" Type="Self.Araclar" Multiplicity="0..1" />
+          <End Role="Sozlesmeler" Type="Self.Sozlesmeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Araclar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sozlesmeler">
+              <PropertyRef Name="Aracid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sozlesmeler_Markalar">
+          <End Role="Markalar" Type="Self.Markalar" Multiplicity="0..1" />
+          <End Role="Sozlesmeler" Type="Self.Sozlesmeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Markalar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sozlesmeler">
+              <PropertyRef Name="Marka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sozlesmeler_Seriler">
+          <End Role="Seriler" Type="Self.Seriler" Multiplicity="0..1" />
+          <End Role="Sozlesmeler" Type="Self.Sozlesmeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seriler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sozlesmeler">
+              <PropertyRef Name="Seri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_AracKiralamaModelStoreContainer">
+          <EntitySet Name="Adminler" EntityType="Self.Adminler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Araclar" EntityType="Self.Araclar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Loglar" EntityType="Self.Loglar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Markalar" EntityType="Self.Markalar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Müsteriler" EntityType="Self.Müsteriler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seriler" EntityType="Self.Seriler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sozlesmeler" EntityType="Self.Sozlesmeler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Araclar_Markalar" Association="Self.FK_Araclar_Markalar">
+            <End Role="Markalar" EntitySet="Markalar" />
+            <End Role="Araclar" EntitySet="Araclar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Araclar_Seriler" Association="Self.FK_Araclar_Seriler">
+            <End Role="Seriler" EntitySet="Seriler" />
+            <End Role="Araclar" EntitySet="Araclar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seriler_Markalar" Association="Self.FK_Seriler_Markalar">
+            <End Role="Markalar" EntitySet="Markalar" />
+            <End Role="Seriler" EntitySet="Seriler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sozlesmeler_Adminler2" Association="Self.FK_Sozlesmeler_Adminler2">
+            <End Role="Adminler" EntitySet="Adminler" />
+            <End Role="Sozlesmeler" EntitySet="Sozlesmeler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sozlesmeler_Araclar" Association="Self.FK_Sozlesmeler_Araclar">
+            <End Role="Araclar" EntitySet="Araclar" />
+            <End Role="Sozlesmeler" EntitySet="Sozlesmeler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sozlesmeler_Markalar" Association="Self.FK_Sozlesmeler_Markalar">
+            <End Role="Markalar" EntitySet="Markalar" />
+            <End Role="Sozlesmeler" EntitySet="Sozlesmeler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sozlesmeler_Seriler" Association="Self.FK_Sozlesmeler_Seriler">
+            <End Role="Seriler" EntitySet="Seriler" />
+            <End Role="Sozlesmeler" EntitySet="Sozlesmeler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_AracKiralamaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Adminler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Soyad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Kullaniciadi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Sifre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fotograf" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Sozlesmeler" Relationship="Self.FK_Sozlesmeler_Adminler2" FromRole="Adminler" ToRole="Sozlesmeler" />
+        </EntityType>
+        <EntityType Name="Araclar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Plaka" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Marka" Type="Byte" />
+          <Property Name="Seri" Type="Byte" />
+          <Property Name="Yil" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Motor" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="KM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Renk" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Yakittipi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Vites" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Motorgucu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Aciklama" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Durum" Type="Boolean" />
+          <Property Name="Foto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Günlük" Type="Int16" />
+          <Property Name="Aylik" Type="Int16" />
+          <Property Name="Yillik" Type="Int16" />
+          <NavigationProperty Name="Markalar" Relationship="Self.FK_Araclar_Markalar" FromRole="Araclar" ToRole="Markalar" />
+          <NavigationProperty Name="Seriler" Relationship="Self.FK_Araclar_Seriler" FromRole="Araclar" ToRole="Seriler" />
+          <NavigationProperty Name="Sozlesmeler" Relationship="Self.FK_Sozlesmeler_Araclar" FromRole="Araclar" ToRole="Sozlesmeler" />
+        </EntityType>
+        <EntityType Name="Markalar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Marka" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Araclar" Relationship="Self.FK_Araclar_Markalar" FromRole="Markalar" ToRole="Araclar" />
+          <NavigationProperty Name="Seriler" Relationship="Self.FK_Seriler_Markalar" FromRole="Markalar" ToRole="Seriler" />
+          <NavigationProperty Name="Sozlesmeler" Relationship="Self.FK_Sozlesmeler_Markalar" FromRole="Markalar" ToRole="Sozlesmeler" />
+        </EntityType>
+        <EntityType Name="Müsteriler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tcno" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Adi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Soyadi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Cinsiyet" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="EhliyetNo" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="Adres" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Seriler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Marka" Type="Byte" />
+          <Property Name="Seri" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Araclar" Relationship="Self.FK_Araclar_Seriler" FromRole="Seriler" ToRole="Araclar" />
+          <NavigationProperty Name="Markalar" Relationship="Self.FK_Seriler_Markalar" FromRole="Seriler" ToRole="Markalar" />
+          <NavigationProperty Name="Sozlesmeler" Relationship="Self.FK_Sozlesmeler_Seriler" FromRole="Seriler" ToRole="Sozlesmeler" />
+        </EntityType>
+        <EntityType Name="Sozlesmeler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tcno" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="Ad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Soyad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Cinsiyet" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Personel" Type="Byte" />
+          <Property Name="Aracid" Type="Byte" />
+          <Property Name="Plaka" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Marka" Type="Byte" />
+          <Property Name="Seri" Type="Byte" />
+          <Property Name="Alistarihi" Type="DateTime" Precision="3" />
+          <Property Name="Teslimtarihi" Type="DateTime" Precision="3" />
+          <Property Name="Ucret" Type="Int32" />
+          <Property Name="Durum" Type="Boolean" />
+          <NavigationProperty Name="Adminler" Relationship="Self.FK_Sozlesmeler_Adminler2" FromRole="Sozlesmeler" ToRole="Adminler" />
+          <NavigationProperty Name="Araclar" Relationship="Self.FK_Sozlesmeler_Araclar" FromRole="Sozlesmeler" ToRole="Araclar" />
+          <NavigationProperty Name="Markalar" Relationship="Self.FK_Sozlesmeler_Markalar" FromRole="Sozlesmeler" ToRole="Markalar" />
+          <NavigationProperty Name="Seriler" Relationship="Self.FK_Sozlesmeler_Seriler" FromRole="Sozlesmeler" ToRole="Seriler" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Sozlesmeler_Adminler2">
+          <End Role="Adminler" Type="Self.Adminler" Multiplicity="0..1" />
+          <End Role="Sozlesmeler" Type="Self.Sozlesmeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adminler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sozlesmeler">
+              <PropertyRef Name="Personel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Araclar_Markalar">
+          <End Role="Markalar" Type="Self.Markalar" Multiplicity="0..1" />
+          <End Role="Araclar" Type="Self.Araclar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Markalar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Araclar">
+              <PropertyRef Name="Marka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Araclar_Seriler">
+          <End Role="Seriler" Type="Self.Seriler" Multiplicity="0..1" />
+          <End Role="Araclar" Type="Self.Araclar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seriler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Araclar">
+              <PropertyRef Name="Seri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sozlesmeler_Araclar">
+          <End Role="Araclar" Type="Self.Araclar" Multiplicity="0..1" />
+          <End Role="Sozlesmeler" Type="Self.Sozlesmeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Araclar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sozlesmeler">
+              <PropertyRef Name="Aracid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seriler_Markalar">
+          <End Role="Markalar" Type="Self.Markalar" Multiplicity="0..1" />
+          <End Role="Seriler" Type="Self.Seriler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Markalar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Seriler">
+              <PropertyRef Name="Marka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sozlesmeler_Markalar">
+          <End Role="Markalar" Type="Self.Markalar" Multiplicity="0..1" />
+          <End Role="Sozlesmeler" Type="Self.Sozlesmeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Markalar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sozlesmeler">
+              <PropertyRef Name="Marka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sozlesmeler_Seriler">
+          <End Role="Seriler" Type="Self.Seriler" Multiplicity="0..1" />
+          <End Role="Sozlesmeler" Type="Self.Sozlesmeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seriler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sozlesmeler">
+              <PropertyRef Name="Seri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OtoKiralamaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Adminler" EntityType="Self.Adminler" />
+          <EntitySet Name="Araclar" EntityType="Self.Araclar" />
+          <EntitySet Name="Markalar" EntityType="Self.Markalar" />
+          <EntitySet Name="Müsteriler" EntityType="Self.Müsteriler" />
+          <EntitySet Name="Seriler" EntityType="Self.Seriler" />
+          <EntitySet Name="Sozlesmeler" EntityType="Self.Sozlesmeler" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Sozlesmeler_Adminler2" Association="Self.FK_Sozlesmeler_Adminler2">
+            <End Role="Adminler" EntitySet="Adminler" />
+            <End Role="Sozlesmeler" EntitySet="Sozlesmeler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Araclar_Markalar" Association="Self.FK_Araclar_Markalar">
+            <End Role="Markalar" EntitySet="Markalar" />
+            <End Role="Araclar" EntitySet="Araclar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Araclar_Seriler" Association="Self.FK_Araclar_Seriler">
+            <End Role="Seriler" EntitySet="Seriler" />
+            <End Role="Araclar" EntitySet="Araclar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sozlesmeler_Araclar" Association="Self.FK_Sozlesmeler_Araclar">
+            <End Role="Araclar" EntitySet="Araclar" />
+            <End Role="Sozlesmeler" EntitySet="Sozlesmeler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seriler_Markalar" Association="Self.FK_Seriler_Markalar">
+            <End Role="Markalar" EntitySet="Markalar" />
+            <End Role="Seriler" EntitySet="Seriler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sozlesmeler_Markalar" Association="Self.FK_Sozlesmeler_Markalar">
+            <End Role="Markalar" EntitySet="Markalar" />
+            <End Role="Sozlesmeler" EntitySet="Sozlesmeler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sozlesmeler_Seriler" Association="Self.FK_Sozlesmeler_Seriler">
+            <End Role="Seriler" EntitySet="Seriler" />
+            <End Role="Sozlesmeler" EntitySet="Sozlesmeler" />
+          </AssociationSet>
+          <EntitySet Name="Loglar" EntityType="DB_AracKiralamaModel.Loglar" />
+        </EntityContainer>
+        <EntityType Name="Loglar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Islem" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Zaman" Type="DateTime" Precision="3" />
+          <Property Name="Yetkili" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_AracKiralamaModelStoreContainer" CdmEntityContainer="OtoKiralamaEntities">
+          <EntitySetMapping Name="Adminler">
+            <EntityTypeMapping TypeName="DB_AracKiralamaModel.Adminler">
+              <MappingFragment StoreEntitySet="Adminler">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="Kullaniciadi" ColumnName="Kullaniciadi" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Fotograf" ColumnName="Fotograf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Araclar">
+            <EntityTypeMapping TypeName="DB_AracKiralamaModel.Araclar">
+              <MappingFragment StoreEntitySet="Araclar">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Plaka" ColumnName="Plaka" />
+                <ScalarProperty Name="Marka" ColumnName="Marka" />
+                <ScalarProperty Name="Seri" ColumnName="Seri" />
+                <ScalarProperty Name="Yil" ColumnName="Yil" />
+                <ScalarProperty Name="Motor" ColumnName="Motor" />
+                <ScalarProperty Name="KM" ColumnName="KM" />
+                <ScalarProperty Name="Renk" ColumnName="Renk" />
+                <ScalarProperty Name="Yakittipi" ColumnName="Yakittipi" />
+                <ScalarProperty Name="Vites" ColumnName="Vites" />
+                <ScalarProperty Name="Motorgucu" ColumnName="Motorgucu" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Günlük" ColumnName="Günlük" />
+                <ScalarProperty Name="Aylik" ColumnName="Aylik" />
+                <ScalarProperty Name="Yillik" ColumnName="Yillik" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Markalar">
+            <EntityTypeMapping TypeName="DB_AracKiralamaModel.Markalar">
+              <MappingFragment StoreEntitySet="Markalar">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Marka" ColumnName="Marka" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Müsteriler">
+            <EntityTypeMapping TypeName="DB_AracKiralamaModel.Müsteriler">
+              <MappingFragment StoreEntitySet="Müsteriler">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Tcno" ColumnName="Tcno" />
+                <ScalarProperty Name="Adi" ColumnName="Adi" />
+                <ScalarProperty Name="Soyadi" ColumnName="Soyadi" />
+                <ScalarProperty Name="Cinsiyet" ColumnName="Cinsiyet" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="EhliyetNo" ColumnName="EhliyetNo" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seriler">
+            <EntityTypeMapping TypeName="DB_AracKiralamaModel.Seriler">
+              <MappingFragment StoreEntitySet="Seriler">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Marka" ColumnName="Marka" />
+                <ScalarProperty Name="Seri" ColumnName="Seri" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sozlesmeler">
+            <EntityTypeMapping TypeName="DB_AracKiralamaModel.Sozlesmeler">
+              <MappingFragment StoreEntitySet="Sozlesmeler">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Tcno" ColumnName="Tcno" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="Cinsiyet" ColumnName="Cinsiyet" />
+                <ScalarProperty Name="Personel" ColumnName="Personel" />
+                <ScalarProperty Name="Aracid" ColumnName="Aracid" />
+                <ScalarProperty Name="Plaka" ColumnName="Plaka" />
+                <ScalarProperty Name="Marka" ColumnName="Marka" />
+                <ScalarProperty Name="Seri" ColumnName="Seri" />
+                <ScalarProperty Name="Alistarihi" ColumnName="Alistarihi" />
+                <ScalarProperty Name="Teslimtarihi" ColumnName="Teslimtarihi" />
+                <ScalarProperty Name="Ucret" ColumnName="Ucret" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DB_AracKiralamaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loglar">
+            <EntityTypeMapping TypeName="DB_AracKiralamaModel.Loglar">
+              <MappingFragment StoreEntitySet="Loglar">
+                <ScalarProperty Name="Yetkili" ColumnName="Yetkili" />
+                <ScalarProperty Name="Zaman" ColumnName="Zaman" />
+                <ScalarProperty Name="Islem" ColumnName="Islem" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
