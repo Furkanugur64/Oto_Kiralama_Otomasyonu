@@ -1,5 +1,5 @@
 
-# ARAÇ KİRALAMA OTOMASYONU
+# ARAÇ KİRALAMA OTOMASYONU :car:
 
 Bu Proje Sql Server Management Studio 18 ve Visual Studio 2019 programı kullanarak yapılmıştır. Veri tabanı entity framework yardımıyla kullanılıyor. Proje tek panelden oluşmaktadır. Admin araç ekleme,silme,güncelleme, kiralama ve kiralanan aracın sözleşmesini bitirme gibi işlevlere sahiptir.Projede kullanıcının yaptığı işlemler loglanmış ve log listesi sayfasında listelenmiştir. Proje geliştirmeye açıktır.Vakit buldukça güncelleyip buraya da atarım. 
 
